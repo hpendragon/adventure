@@ -1,35 +1,111 @@
-let gameHistory = [];
-
-function sendCommand() {
-    const input = document.getElementById('command-input');
-    const command = input.value.trim();
-    
-    if (command === '') return;
-
-    fetch('/game/action', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ action: command })
-    })
-    .then(response => response.json())
-    .then(data => {
-        updateGameOutput(data);
-        input.value = '';
-    })
-    .catch(error => console.error('Error:', error));
+body {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: monospace;
+    margin: 0;
+    padding: 20px;
 }
 
-function updateGameOutput(data) {
-    const output = document.getElementById('game-output');
-    const newEntry = document.createElement('div');
-    newEntry.textContent = data.response;
-    output.appendChild(newEntry);
-    output.scrollTop = output.scrollHeight;
+#game-container {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-// Initialize game
-document.addEventListener('DOMContentLoaded', function() {
-    // Initial game setup
-});
+#game-output {
+    background-color: #000000;
+    border: 1px solid #333;
+    height: 400px;
+    overflow-y: scroll;
+    padding: 20px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+#input-area {
+    display: flex;
+    gap: 10px;
+}
+
+#command-input {
+    flex-grow: 1;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+/* New styles for different text types */
+.user-input {
+    color: #66ff66;  /* Light green for user input */
+    margin: 10px 0;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+.story-message {
+    color: #ffffff;  /* White for story text */
+    margin: 10px 0;
+}
+
+.choices {
+    color: #87CEEB;  /* Sky blue for available choices */
+    margin: 10px 0;
+    font-style: italic;
+}
+
+.error-message {
+    color: #ff6666;  /* Light red for error messages */
+    margin: 10px 0;
+}
+
+/* Add a separator between interactions */
+.interaction-separator {
+    border-bottom: 1px solid #333;
+    margin: 10px 0;
+}
+
+#game-output {
+    /* ... existing styles ... */
+    font-size: 16px;
+}
+
+.story-message {
+    /* ... existing styles ... */
+    padding: 5px 0;
+}
+
+.choices {
+    /* ... existing styles ... */
+    padding: 5px 0;
+}
+
+/* Add a prompt symbol to the input */
+#command-input {
+    /* ... existing styles ... */
+    padding-left: 25px;
+    position: relative;
+}
+
+#input-area {
+    /* ... existing styles ... */
+    position: relative;
+}
+
+#input-area::before {
+    content: ">";
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #66ff66;
+    z-index: 1;
+}
