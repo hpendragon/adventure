@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Adventure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div id="game-container">
+        <div id="game-output"></div>
+        
+        <div id="player-info">
+            <div id="stats"></div>
+            <div id="inventory"></div>
+        </div>
+        
+        <div id="input-area">
+            <input type="text" id="command-input" placeholder="Enter your action...">
+            <button onclick="sendCommand()">Submit</button>
+        </div>
+        
+        <div id="reference-area">
+            <h3>Common Commands</h3>
+            <div id="command-list"></div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
